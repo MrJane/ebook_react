@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import {HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import Ebook from "./pages/Ebook";
+import EbookStore from "./pages/EbookStore";
 import './App.css';
 
 function App() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const html = document.querySelector('html');
+    let fontSize = window.innerWidth / 10;
+    fontSize = fontSize > 50 ? 50 : fontSize;
+    html.style.fontSize = fontSize + 'px';
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Ebook}/>
+        <Route path="/search" component={EbookStore}/>
+        <Redirect to="/"/>
+      </Switch>
+    </Router>
   );
 }
 
